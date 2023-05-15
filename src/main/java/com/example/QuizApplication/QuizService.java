@@ -70,4 +70,20 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() {
         return this.quizRepository.getAllQuizzes();
     }
+
+    public String getStatus(int id) {
+        Optional<Quiz> opt = this.quizRepository.getQuizById(id);
+
+        if( opt.isEmpty() )throw new RuntimeException("Quiz with id = " + id + "does not exist.");
+
+        Quiz quiz = opt.get();
+        Date startDate = quiz.getStartDate();
+        Date endDate = quiz.getEndDate();
+
+        Date currTime = new Date();
+
+        if(currTime.before(startDate) )return "inactive";
+        else if( currTime.after(endDate) )return "finished";
+        else return "active";
+    }
 }

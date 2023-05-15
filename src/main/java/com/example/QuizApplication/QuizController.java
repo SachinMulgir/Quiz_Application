@@ -51,4 +51,19 @@ public class QuizController {
         return this.quizService.getAllQuizzes();
     }
 
+    @GetMapping("/quizzes/status/{id}")
+    public ResponseEntity getStatus(@PathVariable int id){
+        {
+            try{
+                String status = this.quizService.getStatus(id);
+                return new ResponseEntity(status, HttpStatus.OK);
+            }
+            catch (RuntimeException ex){
+                return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            }
+
+        }
+    }
+
+
 }
