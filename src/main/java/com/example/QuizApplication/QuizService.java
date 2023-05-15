@@ -47,13 +47,10 @@ public class QuizService {
 
             Quiz quiz = opt.get();
             Date endDate = quiz.getEndDate();
-            System.out.println("quiz end date : "+ endDate);
 
             long timeInMillis = endDate.getTime();
-            System.out.println("endDate in millis : " +timeInMillis);
 
             Date after5Mins = new Date(timeInMillis + (5 * 60000));
-            System.out.println("Date after 5 mins: " + after5Mins);
 
             if( currTime.after(after5Mins)){
                 return quiz.getRightAnswer();
